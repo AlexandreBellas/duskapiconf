@@ -39,7 +39,7 @@ public function setConfig($key, $value)
     $encoded = base64_encode(json_encode($value));
     $query = "?key=".$key.'&value='.$encoded;
     $this->browse(function($browser) use ($query) {
-        $data = $browser->visit('/duskapiconf/set'.$query)->element('.content')->getAttribute('innerHTML');
+        $data = $browser->visit('/duskapiconf/set'.$query)->element('.content')->getText();
         $data = trim($data);
         if ($data !== 'ok') {
             $this->assertTrue(false);

@@ -1,5 +1,5 @@
 <?php
-namespace Manyapp\DuskApiConf\Middleware;
+namespace AleBatistella\DuskApiConf\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Storage;

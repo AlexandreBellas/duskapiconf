@@ -18,9 +18,11 @@
             "AleBatistella\\DuskApiConf\\": "src/"
         }
     },
-    "require": {},
-    "require-dev": {},
+    "require": {
+        "php": "^8.0"
+    },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "laravel": {
             "providers": [
@@ -28,5 +30,10 @@
             ],
             "aliases": {}
         }
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "optimize-autoloader": true
     }
 }

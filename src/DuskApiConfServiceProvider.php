@@ -1,6 +1,6 @@
 <?php
 
-namespace Manyapp\DuskApiConf;
+namespace AleBatistella\DuskApiConf;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;

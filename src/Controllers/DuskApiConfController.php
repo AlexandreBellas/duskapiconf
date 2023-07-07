@@ -1,6 +1,6 @@
 <?php
 
-namespace Manyapp\DuskApiConf\Controllers;
+namespace AleBatistella\DuskApiConf\Controllers;
 use Illuminate\Support\Facades\Storage;
 
 class DuskApiConfController
