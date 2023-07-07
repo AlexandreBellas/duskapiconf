@@ -20,7 +20,7 @@
     },
     "require": {},
     "require-dev": {},
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "extra": {
         "laravel": {
             "providers": [
