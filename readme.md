@@ -1,39 +1,50 @@
-![Manyapp DuskApiConf](https://many.app/wp-content/uploads/2019/07/manyapp_duskapiconf.png)
+# Dusk API configuration
 
-**A Laravel module to perform live configuration changes from your Dusk tests**
+A Laravel module to perform live configuration changes from your Dusk tests.
+Forked from [Manyapp DuskApiConf repository](https://github.com/manyapp/duskapiconf).
 
 ## The issue
 
-Currently, the only way to define the configuration of your Laravel app during Dusk tests is to set the relevant variables in a dedicated `.env.dusk.local` file. This file is copied and read during the application's boot, and therefore cannot be changed within Dusk tests. 
+Currently, the only way to define the configuration of your Laravel app during
+Dusk tests is to set the relevant variables in a dedicated `.env.dusk.local`
+file. This file is copied and read during the application's boot, and therefore
+cannot be changed within Dusk tests.
 
-This behaviour can be problematic, as a lot of developers need to change the configuration in specific tests to see if the application reacts accordingly. 
+This behavior can be problematic, as a lot of developers need to change the
+configuration in specific tests to see if the application reacts accordingly.
 
-As mentionned [here](https://github.com/laravel/dusk/issues/599), there is no easy way to tackle this problem. 
+As mentioned [here](https://github.com/laravel/dusk/issues/599), there is no
+easy way to tackle this problem.
 
 ## The solution
 
-This modules offers an easy possibility to change the configuration of your application during the runtime of your Dusk tests.
+This modules offers an easy possibility to change the configuration of your
+application during the runtime of your Dusk tests.
 
-See how it works on our [blog article](https://many.app/changing-laravel-configuration-during-dusk-tests/). 
+It works by making available a hidden API route to register the configuration in
+a temporary file, which is read on the further requests from the dusk tests.
 
 ## Installation
 
 Install the module with:
 
 ```
-composer require manyapp/duskapiconf --dev
+composer require alebatistella/duskapiconf --dev
 ```
 
-Then, you will have to modify your `DustTestCase.php` to add three methods. Alternatively, you can add the following methods to the Trait of your choice and use the Trait in your Dusk tests.
+Then, you will have to modify your `DustTestCase.php` to add three methods.
+Alternatively, you can add the following methods to the Trait of your choice and
+use the Trait in your Dusk tests.
 
 ```
 /**
-* Set live config option
-*
-* @param string $key 
-* @param mixed $value
-* @return void
-*/
+ * Set live config option.
+ *
+ * @param string $key The configuration key.
+ * @param mixed $value The configuration value.
+ *
+ * @return void
+ */
 public function setConfig($key, $value)
 {
     $encoded = base64_encode(json_encode($value));
@@ -49,11 +60,11 @@ public function setConfig($key, $value)
 
 
 /**
-* Get a current configuration item
-*
-* @param string $key
-* @return mixed
-*/
+ * Get a current configuration item.
+ *
+ * @param string $key The configuration key.
+ * @return mixed
+ */
 public function getConfig($key)
 {
     $query = "?key=".$key;
@@ -66,10 +77,10 @@ public function getConfig($key)
 }
 
 /**
-* Reset the configuration to its initial status
-*
-* @return void
-*/
+ * Reset the configuration to its initial status.
+ *
+ * @return void
+ */
 public function resetConfig()
 {
     $this->browse(function($browser) {
@@ -110,16 +121,14 @@ public function your_dusk_test()
 Type the following commands:
 
 ```
-php artisan vendor:publish --provider="Manyapp\DuskApiConf\DuskApiConfServiceProvider"
+php artisan vendor:publish --provider="AleBatistella\DuskApiConf\DuskApiConfServiceProvider"
 ```
 
 Modify the Storage disk and the name of the temporary file.
 
 ## Contribute
 
-For any bug or feature request, use Github. 
-
-For any other feedback, let us a comment on this [blog article](https://many.app/changing-laravel-configuration-during-dusk-tests/) or [contact us](https://many.app/contact/).
+Feel free to open issues or submit pull requests.
 
 ## License
 
