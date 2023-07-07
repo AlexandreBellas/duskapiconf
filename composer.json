@@ -14,25 +14,19 @@
         }
     ],
     "autoload": {
-            "psr-4": {
-                "AleBatistella\\DuskApiConf\\": "src/"
-            }
-        },
-    "require": {
-        
+        "psr-4": {
+            "AleBatistella\\DuskApiConf\\": "src/"
+        }
     },
-    "require-dev": {
-        
-    },
+    "require": {},
+    "require-dev": {},
     "minimum-stability": "stable",
     "extra": {
         "laravel": {
             "providers": [
                 "AleBatistella\\DuskApiConf\\DuskApiConfServiceProvider"
             ],
-            "aliases": {
-
-            }
+            "aliases": {}
         }
     }
 }
