@@ -18,11 +18,11 @@ class ConfigStoreMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (! Storage::disk(config('manyapp.duskapiconf.disk'))->exists(config('manyapp.duskapiconf.file'))) {
+        if (!Storage::disk(config('alebatistella.duskapiconf.disk'))->exists(config('alebatistella.duskapiconf.file'))) {
             return $next($request);
         }
 
-        $contents = Storage::disk(config('manyapp.duskapiconf.disk'))->get(config('manyapp.duskapiconf.file'));
+        $contents = Storage::disk(config('alebatistella.duskapiconf.disk'))->get(config('alebatistella.duskapiconf.file'));
 
         $decoded = json_decode($contents, true);
         foreach (array_keys($decoded) as $k) {

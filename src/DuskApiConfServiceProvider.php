@@ -19,10 +19,10 @@ class DuskApiConfServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(
             __DIR__ . '/../config/config.php',
-            'manyapp.duskapiconf'
+            'alebatistella.duskapiconf'
         );
 
-        $contents = Storage::disk(config('manyapp.duskapiconf.disk'))->get(config('manyapp.duskapiconf.file'));
+        $contents = Storage::disk(config('alebatistella.duskapiconf.disk'))->get(config('alebatistella.duskapiconf.file'));
         $decoded = json_decode($contents, true);
         foreach (array_keys($decoded) as $k) {
             config([$k => $decoded[$k]]);
@@ -34,7 +34,7 @@ class DuskApiConfServiceProvider extends ServiceProvider
 
         $router = $this->app['router'];
         $this->app->booted(function () use ($router) {
-            $router->pushMiddlewareToGroup('web', \Manyapp\DuskApiConf\Middleware\ConfigStoreMiddleware::class);
+            $router->pushMiddlewareToGroup('web', \AleBatistella\DuskApiConf\Middleware\ConfigStoreMiddleware::class);
         });
     }
 

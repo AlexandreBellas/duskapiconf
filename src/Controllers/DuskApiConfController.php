@@ -36,13 +36,13 @@ class DuskApiConfController
             $value = json_decode(base64_decode($request->input('value')), true);
 
             $currentContent = [];
-            if (Storage::disk(config('manyapp.duskapiconf.disk'))->exists(config('manyapp.duskapiconf.file'))) {
-                $decoded = Storage::get(config('manyapp.duskapiconf.file'));
+            if (Storage::disk(config('alebatistella.duskapiconf.disk'))->exists(config('alebatistella.duskapiconf.file'))) {
+                $decoded = Storage::get(config('alebatistella.duskapiconf.file'));
                 $currentContent = json_decode($decoded, true);
             }
 
             $currentContent[$request->input('key')] = $value;
-            Storage::disk(config('manyapp.duskapiconf.disk'))->put(config('manyapp.duskapiconf.file'), json_encode($currentContent));
+            Storage::disk(config('alebatistella.duskapiconf.disk'))->put(config('alebatistella.duskapiconf.file'), json_encode($currentContent));
 
             return view('duskapiconf::data', ['value' => 'ok']);
         }
@@ -56,7 +56,7 @@ class DuskApiConfController
     public function reset()
     {
         $request = request();
-        Storage::disk(config('manyapp.duskapiconf.disk'))->delete(config('manyapp.duskapiconf.file'));
+        Storage::disk(config('alebatistella.duskapiconf.disk'))->delete(config('alebatistella.duskapiconf.file'));
         return view('duskapiconf::data', ['value' => 'ok']);
     }
 }
