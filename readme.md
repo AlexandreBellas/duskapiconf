@@ -26,66 +26,22 @@ a temporary file, which is read on the further requests from the dusk tests.
 
 ## Installation
 
-Install the module with:
-
 ```
 composer require alebatistella/duskapiconf --dev
 ```
 
-Then, you will have to modify your `DustTestCase.php` to add three methods.
-Alternatively, you can add the following methods to the Trait of your choice and
-use the Trait in your Dusk tests.
+You will have to add the trait to your `DustTestCase.php` as shown:
 
-```
-/**
- * Set live config option.
- *
- * @param string $key The configuration key.
- * @param mixed $value The configuration value.
- *
- * @return void
- */
-public function setConfig($key, $value)
-{
-    $encoded = base64_encode(json_encode($value));
-    $query = "?key=".$key.'&value='.$encoded;
-    $this->browse(function($browser) use ($query) {
-        $data = $browser->visit('/duskapiconf/set'.$query)->element('.content')->getText();
-        $data = trim($data);
-        if ($data !== 'ok') {
-            $this->assertTrue(false);
-        }
-    });
-}
+```php
+<?php
 
+use Laravel\Dusk\TestCase as BaseTestCase;
+use AleBatistella\DuskApiConfig\Traits\UsesDuskApiConfig;
 
-/**
- * Get a current configuration item.
- *
- * @param string $key The configuration key.
- * @return mixed
- */
-public function getConfig($key)
-{
-    $query = "?key=".$key;
-    $result = null;
-    $this->browse(function($browser) use ($query, &$result) {
-        $data = $browser->visit('/duskapiconf/get'.$query)->element('.content')->getAttribute('innerHTML');
-        $result = json_decode(base64_decode($data), true);
-    });
-    return $result;
-}
+abstract class DuskTestCase extends BaseTestCase {
+    use UsesDuskApiConfig;
 
-/**
- * Reset the configuration to its initial status.
- *
- * @return void
- */
-public function resetConfig()
-{
-    $this->browse(function($browser) {
-        $browser->visit('/duskapiconf/reset');
-    });
+    // ...
 }
 
 ```

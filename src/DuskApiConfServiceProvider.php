@@ -8,62 +8,58 @@ use Illuminate\Support\ServiceProvider;
 class DuskApiConfServiceProvider extends ServiceProvider
 {
     /**
-     * @inheritDoc
-     *
-     * @author Alexandre Batistella
-     * @version 1.0.0
-     * @since 1.0.0
+     * Bootstrap the application services.
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        $this->loadRoutesFrom(__DIR__ . '/Routes/Route.php');
-        $this->loadViewsFrom(__DIR__ . '/Resources/Views', 'duskapiconf');
         $this->mergeConfigFrom(
             __DIR__ . '/../config/config.php',
-            'alebatistella.duskapiconf'
+            'duskapiconf'
         );
 
-        $contents = Storage::disk(config('alebatistella.duskapiconf.disk'))
-            ->get(config('alebatistella.duskapiconf.file'));
+        $env = config('duskapiconf.env');
+        $excludedEnv = config('duskapiconf.excluded_env');
 
-        $decoded = json_decode($contents, true);
+        $shouldBoot = $excludedEnv
+            ? !app()->environment($excludedEnv)
+            : app()->environment($env);
 
-        foreach (array_keys($decoded) as $k) {
-            config([$k => $decoded[$k]]);
+        if ($shouldBoot) {
+            $this->loadRoutesFrom(__DIR__ . '/routes/dusk.php');
+            $this->loadViewsFrom(__DIR__ . '/resources/views', 'duskapiconf');
+
+            $contents = Storage::disk(config('duskapiconf.disk'))
+                ->get(config('duskapiconf.file'));
+
+            $decoded = json_decode($contents, true);
+
+            foreach (array_keys($decoded) as $key) {
+                config([$key => $decoded[$key]]);
+            }
+
+            $this->publishes([
+                __DIR__ . '/../config/config.php' => config_path('duskapiconf.php'),
+            ]);
+
+            $router = $this->app['router'];
+
+            $this->app->booted(function () use ($router) {
+                $router->pushMiddlewareToGroup(
+                    'web',
+                    \AleBatistella\DuskApiConf\Middleware\ConfigStoreMiddleware::class
+                );
+            });
         }
-
-        $this->publishes([
-            __DIR__ . '/../config/config.php' => config_path('duskapiconf.php'),
-        ]);
     }
 
     /**
-     * @inheritDoc
-     *
-     * @author Alexandre Batistella
-     * @version 1.0.0
-     * @since 1.0.0
+     * Register the application services.
      *
      * @return void
      */
-    public function booted()
-    {
-        $router = $this->app['router'];
-        $router->pushMiddlewareToGroup('web', \AleBatistella\DuskApiConf\Middleware\ConfigStoreMiddleware::class);
-    }
-
-    /**
-     * @inheritDoc
-     *
-     * @author Alexandre Batistella
-     * @version 1.0.0
-     * @since 1.0.0
-     *
-     * @return void
-     */
-    public function register()
+    public function register(): void
     {
     }
 }
