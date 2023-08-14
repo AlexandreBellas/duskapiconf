@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.4](https://github.com/AlexandreBellas/duskapiconf/compare/v1.2.3...v1.2.4) (2023-08-14)
+
+
+### Bug Fixes
+
+* **provider:** fix file JSON verification ([3b078b9](https://github.com/AlexandreBellas/duskapiconf/commit/3b078b9c1eac2bd96830b4b5c6b11180f9d8805e))
+
 ## [1.2.3](https://github.com/AlexandreBellas/duskapiconf/compare/v1.2.2...v1.2.3) (2023-08-14)
 
 
