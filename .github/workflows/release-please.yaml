@@ -4,7 +4,7 @@ name: Release automation
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   release-please:
@@ -13,4 +13,4 @@ jobs:
       - uses: google-github-actions/release-please-action@v3
         with:
           release-type: php
-          default-branch: main
+          default-branch: master
