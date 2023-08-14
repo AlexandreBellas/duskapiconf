@@ -16,7 +16,7 @@ class ConfigStoreMiddleware
      *
      * @return void
      */
-    public function handle($request, Closure $next): void
+    public function handle($request, Closure $next)
     {
         $filesystem = Storage::disk(config('duskapiconf.storage.disk'));
 
