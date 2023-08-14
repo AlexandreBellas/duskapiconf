@@ -19,8 +19,7 @@
         }
     },
     "require": {
-        "php": "^8.0",
-        "laravel/laravel": "^10.2"
+        "php": "^8.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -36,9 +35,5 @@
         "sort-packages": true,
         "preferred-install": "dist",
         "optimize-autoloader": true
-    },
-    "require-dev": {
-        "laravel/dusk": "^7.9",
-        "laravel/pint": "^1.10"
     }
 }
