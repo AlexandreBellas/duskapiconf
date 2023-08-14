@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.1](https://github.com/AlexandreBellas/duskapiconf/compare/v1.2.0...v1.2.1) (2023-08-14)
+
+
+### Bug Fixes
+
+* **composer:** remove laravel dependencies ([db3e29c](https://github.com/AlexandreBellas/duskapiconf/commit/db3e29c27672afef34b66f8cd2fa1a05b1a9b30e))
+
+
+### Miscellaneous Chores
+
+* update readme ([1287fd7](https://github.com/AlexandreBellas/duskapiconf/commit/1287fd7fcde4ac41e7833f8fba330e6db2974e0f))
+
 ## [1.2.0](https://github.com/AlexandreBellas/duskapiconf/compare/v1.1.0...v1.2.0) (2023-08-14)
 
 
