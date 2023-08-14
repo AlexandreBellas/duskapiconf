@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3](https://github.com/AlexandreBellas/duskapiconf/compare/v1.2.2...v1.2.3) (2023-08-14)
+
+
+### Bug Fixes
+
+* **config:** use config correctly and add error handling ([05f0fd0](https://github.com/AlexandreBellas/duskapiconf/commit/05f0fd080749b08e7e1b12d55279f05d3b0bf397))
+
 ## [1.2.2](https://github.com/AlexandreBellas/duskapiconf/compare/v1.2.1...v1.2.2) (2023-08-14)
 
 
