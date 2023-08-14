@@ -18,13 +18,13 @@ class ConfigStoreMiddleware
      */
     public function handle($request, Closure $next): void
     {
-        $filesystem = Storage::disk(config('duskapiconf.disk'));
+        $filesystem = Storage::disk(config('duskapiconf.storage.disk'));
 
-        if (!$filesystem->exists(config('duskapiconf.file'))) {
+        if (!$filesystem->exists(config('duskapiconf.storage.file'))) {
             return $next($request);
         }
 
-        $contents = $filesystem->get(config('duskapiconf.file'));
+        $contents = $filesystem->get(config('duskapiconf.storage.file'));
 
         $decoded = json_decode($contents, true);
         foreach (array_keys($decoded) as $key) {

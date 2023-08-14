@@ -40,18 +40,18 @@ class DuskApiConfController
                 $this->errorResponseData
             );
         } else {
-            $filesystem = Storage::disk(config('duskapiconf.disk'));
+            $filesystem = Storage::disk(config('duskapiconf.storage.disk'));
             $value = json_decode(base64_decode($request->input('value')), true);
 
             $currentContent = [];
-            if ($filesystem->exists(config('duskapiconf.file'))) {
-                $decoded = Storage::get(config('duskapiconf.file'));
+            if ($filesystem->exists(config('duskapiconf.storage.file'))) {
+                $decoded = Storage::get(config('duskapiconf.storage.file'));
                 $currentContent = json_decode($decoded, true);
             }
 
             $currentContent[$request->input('key')] = $value;
             $filesystem->put(
-                config('duskapiconf.file'),
+                config('duskapiconf.storage.file'),
                 json_encode($currentContent)
             );
 
@@ -66,8 +66,8 @@ class DuskApiConfController
      */
     public function reset()
     {
-        Storage::disk(config('duskapiconf.disk'))->delete(
-            config('duskapiconf.file')
+        Storage::disk(config('duskapiconf.storage.disk'))->delete(
+            config('duskapiconf.storage.file')
         );
 
         return view('duskapiconf::data', $this->successResponseData);

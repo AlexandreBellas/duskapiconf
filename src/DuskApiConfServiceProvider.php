@@ -26,32 +26,44 @@ class DuskApiConfServiceProvider extends ServiceProvider
             ? !app()->environment($excludedEnv)
             : app()->environment($env);
 
-        if ($shouldBoot) {
-            $this->loadRoutesFrom(__DIR__ . '/routes/dusk.php');
-            $this->loadViewsFrom(__DIR__ . '/resources/views', 'duskapiconf');
+        if (!$shouldBoot) {
+            return;
+        }
 
-            $contents = Storage::disk(config('duskapiconf.disk'))
-                ->get(config('duskapiconf.file'));
+        $this->loadRoutesFrom(__DIR__ . '/routes/dusk.php');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'duskapiconf');
 
-            $decoded = json_decode($contents, true);
+        $storageDisk = config('duskapiconf.storage.disk');
+        $filePath = config('duskapiconf.storage.file');
 
+        $filesystem = Storage::disk($storageDisk);
+
+        $contents = $filesystem->get($filePath);
+        $decoded = json_decode($contents, true);
+
+        if (
+            json_last_error() !== JSON_ERROR_NONE &&
+            gettype($decoded) === 'array'
+        ) {
             foreach (array_keys($decoded) as $key) {
                 config([$key => $decoded[$key]]);
             }
-
-            $this->publishes([
-                __DIR__ . '/../config/config.php' => config_path('duskapiconf.php'),
-            ]);
-
-            $router = $this->app['router'];
-
-            $this->app->booted(function () use ($router) {
-                $router->pushMiddlewareToGroup(
-                    'web',
-                    \AleBatistella\DuskApiConf\Middleware\ConfigStoreMiddleware::class
-                );
-            });
+        } else {
+            $filesystem->delete($filePath);
         }
+
+        $this->publishes([
+            __DIR__ . '/../config/config.php' => config_path('duskapiconf.php'),
+        ]);
+
+        $router = $this->app['router'];
+
+        $this->app->booted(function () use ($router) {
+            $router->pushMiddlewareToGroup(
+                'web',
+                \AleBatistella\DuskApiConf\Middleware\ConfigStoreMiddleware::class
+            );
+        });
     }
 
     /**
