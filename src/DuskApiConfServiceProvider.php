@@ -42,7 +42,7 @@ class DuskApiConfServiceProvider extends ServiceProvider
         $decoded = json_decode($contents, true);
 
         if (
-            json_last_error() !== JSON_ERROR_NONE &&
+            json_last_error() === JSON_ERROR_NONE &&
             gettype($decoded) === 'array'
         ) {
             foreach (array_keys($decoded) as $key) {
