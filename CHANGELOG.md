@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.5](https://github.com/AlexandreBellas/duskapiconf/compare/v1.2.4...v1.2.5) (2023-08-14)
+
+
+### Bug Fixes
+
+* **middleware:** remove typing from middleware ([0c504ea](https://github.com/AlexandreBellas/duskapiconf/commit/0c504ea248c315966838c78763e92d630a42e902))
+
 ## [1.2.4](https://github.com/AlexandreBellas/duskapiconf/compare/v1.2.3...v1.2.4) (2023-08-14)
 
 
