@@ -52,7 +52,7 @@ To use it, use the defined methods below directly in your Dusk tests.
 
 ```
 /** @test */
-public function your_dusk_test()
+public function test_should_use_dusk_for_something ()
 {
     // Get a config variable
     // Here, $appName will be "Laravel" on a fresh install
@@ -61,30 +61,28 @@ public function your_dusk_test()
     // Change a config variable
     $this->setConfig('app.name', 'Laravel is fantastic');
 
-    // Here, $appName will be Laravel is fantastic
+    // Here, $appName will be "Laravel is fantastic"
     $appName = $this->getConfig('app.name');
 
     // Your tests with assertions
+    // ...
 
     // You can reset all config variables set before.
-    // This is not mandatory: you can keep the variables set for the next test if you want.
+    // This is not mandatory: you can keep the variables set for the next test
+    // if you want (even though it is not a good practice).
     $this->resetConfig();
 }
 ```
 
-## Change location of the config temporary file
-
-Type the following commands:
+## Publish configuration file
 
 ```
 php artisan vendor:publish --provider="AleBatistella\DuskApiConf\DuskApiConfServiceProvider"
 ```
 
-Modify the Storage disk and the name of the temporary file.
-
-## Contribute
-
-Feel free to open issues or submit pull requests.
+With this command, you'll create a new `duskapiconf.php` in the `config` folder.
+Then, you can modify the storage disk and the name of the temporary file,
+including configuration about the used environment.
 
 ## License
 
