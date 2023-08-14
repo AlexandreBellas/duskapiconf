@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/AlexandreBellas/duskapiconf/compare/v1.2.1...v1.2.2) (2023-08-14)
+
+
+### Bug Fixes
+
+* work on psr-4 standards ([72651ff](https://github.com/AlexandreBellas/duskapiconf/commit/72651ffacb87ccc096a621d9ec316aeb087bfba2))
+
 ## [1.2.1](https://github.com/AlexandreBellas/duskapiconf/compare/v1.2.0...v1.2.1) (2023-08-14)
 
 
