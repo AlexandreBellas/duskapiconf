@@ -36,7 +36,7 @@ You will have to add the trait to your `DustTestCase.php` as shown:
 <?php
 
 use Laravel\Dusk\TestCase as BaseTestCase;
-use AleBatistella\DuskApiConfig\Traits\UsesDuskApiConfig;
+use AleBatistella\DuskApiConf\Traits\UsesDuskApiConfig;
 
 abstract class DuskTestCase extends BaseTestCase {
     use UsesDuskApiConfig;
