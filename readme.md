@@ -26,11 +26,11 @@ a temporary file, which is read on the further requests from the dusk tests.
 
 ## Installation
 
-```
+```bash
 composer require alebatistella/duskapiconf --dev
 ```
 
-You will have to add the trait to your `DustTestCase.php` as shown:
+You will have to add the trait to your `DusKTestCase.php` as shown:
 
 ```php
 <?php
@@ -50,7 +50,7 @@ abstract class DuskTestCase extends BaseTestCase {
 
 To use it, use the defined methods below directly in your Dusk tests.
 
-```
+```php
 /** @test */
 public function test_should_use_dusk_for_something ()
 {
@@ -76,7 +76,7 @@ public function test_should_use_dusk_for_something ()
 
 ## Publish configuration file
 
-```
+```bash
 php artisan vendor:publish --provider="AleBatistella\DuskApiConf\DuskApiConfServiceProvider"
 ```
 
